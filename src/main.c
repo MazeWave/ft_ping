@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/09 14:06:22 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:07:31 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	init_ping_struct(t_ping *ping, char **argv)
 {
 	AUTO_LOG;
 	ping->is_bonus = (strstr(argv[0], "ft_ping_bonus") == NULL) ? false : true;
+	ping->is_root = (getuid() == 0) ? true : false;
 	ping->hostname = argv[1];
 	LOG(BLUE "is_bonus: %d" RESET, ping->is_bonus);
 	LOG(BLUE "hostname: %s" RESET, ping->hostname);

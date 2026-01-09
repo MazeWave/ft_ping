@@ -6,23 +6,47 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/09 13:36:31 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:11:05 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PING_H
 #define FT_PING_H
 
-#include <stdio.h>
-#include <string.h>
-#include "log.h"
-#include "colors.h"
+# include <stddef.h>
+# include <string.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+
+# include <arpa/inet.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
+# include <netdb.h>
+# include <netinet/in.h>
+# include <netinet/ip_icmp.h>
+# include <signal.h>
+# include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/socket.h>
+# include <sys/time.h>
+# include <sys/types.h>
+# include <unistd.h>
+
+# include "log.h"
+# include "colors.h"
+# include "parser.h"
 
 #define unused __attribute__((unused))
 
 typedef struct s_ping
 {
 	bool	is_bonus;
+	bool	is_root;
 	char	*hostname;
 }	t_ping;
 
