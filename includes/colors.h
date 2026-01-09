@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ping.h                                          :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/09 13:36:31 by ldalmass         ###   ########.fr       */
+/*   Created: 2025/01/27 12:18:44 by hugolefevre       #+#    #+#             */
+/*   Updated: 2026/01/09 13:30:42 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PING_H
-#define FT_PING_H
+#ifndef COLORS_H
+#define COLORS_H
 
-#include <stdio.h>
-#include <string.h>
-#include "log.h"
-#include "colors.h"
+# define RESET		"\033[0m"
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define MAGENTA	"\033[0;35m"
+# define CYAN		"\033[0;36m"
 
-#define unused __attribute__((unused))
-
-typedef struct s_ping
-{
-	bool	is_bonus;
-	char	*hostname;
-}	t_ping;
+# define INFO		"\033[0;34m[INFO]\033[0m  "
+# define DEBUG		"\033[0;33m[DEBUG]\033[0m "
+# define ERROR		"\033[0;31m[ERROR]\033[0m "
 
 #endif

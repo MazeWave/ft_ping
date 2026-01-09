@@ -6,7 +6,7 @@
 #    By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/09 11:23:20 by maze              #+#    #+#              #
-#    Updated: 2026/01/09 12:29:26 by ldalmass         ###   ########.fr        #
+#    Updated: 2026/01/09 13:38:17 by ldalmass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,13 @@ NAME	=	ft_ping
 NAME_B	=	ft_ping_bonus
 
 SRC		=	src/main.c \
+			src/log.c \
 
 OBJS	=	$(SRC:.c=.o)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror -std=c11 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -std=c23 -fsanitize=address
 
 RM		=	rm -rf
 
