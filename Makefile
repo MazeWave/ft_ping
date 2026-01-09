@@ -6,7 +6,7 @@
 #    By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/09 11:23:20 by maze              #+#    #+#              #
-#    Updated: 2026/01/09 12:11:22 by ldalmass         ###   ########.fr        #
+#    Updated: 2026/01/09 12:29:26 by ldalmass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@$(RM) $(NAME).o
 
-bonus :
+bonus : all
 	@ln -sf $(NAME) $(NAME_B)
 
 clean :
