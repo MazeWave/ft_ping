@@ -6,7 +6,7 @@
 #    By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/09 11:23:20 by maze              #+#    #+#              #
-#    Updated: 2026/01/09 13:38:17 by ldalmass         ###   ########.fr        #
+#    Updated: 2026/01/09 14:39:09 by ldalmass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME_B	=	ft_ping_bonus
 
 SRC		=	src/main.c \
 			src/log.c \
+			src/parser.c \
 
 OBJS	=	$(SRC:.c=.o)
 

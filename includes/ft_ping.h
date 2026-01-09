@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/09 14:11:05 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:39:26 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 
 # include "log.h"
 # include "colors.h"
-# include "parser.h"
 
 #define unused __attribute__((unused))
 
@@ -49,5 +48,9 @@ typedef struct s_ping
 	bool	is_root;
 	char	*hostname;
 }	t_ping;
+
+int     parse_args(int argc, char **argv);
+void    help(char *elf_name);
+void    init_ping_struct(t_ping *ping, char **argv);
 
 #endif
