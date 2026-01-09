@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/09 14:37:44 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:45:57 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_ping_struct(t_ping *ping, char **argv)
 
 int parse_args(int argc, char **argv)
 {
-    int opt, r = 0;
+    int opt = 0;
 	while ((opt = getopt(argc, argv, "h")) != -1)
 	{
 		switch (opt)
@@ -45,6 +45,5 @@ int parse_args(int argc, char **argv)
 				return (help(argv[0]), EXIT_FAILURE);
 		}
 	}
-	(void)r;
     return (0);
 }
