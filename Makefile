@@ -1,0 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/09 11:23:20 by maze              #+#    #+#              #
+#    Updated: 2026/01/09 12:11:22 by ldalmass         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	=	ft_ping
+NAME_B	=	ft_ping_bonus
+
+SRC		=	src/main.c \
+
+OBJS	=	$(SRC:.c=.o)
+
+CC		=	gcc
+
+CFLAGS	=	-Wall -Wextra -Werror -std=c11 -fsanitize=address
+
+RM		=	rm -rf
+
+#rules
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+all : $(NAME)
+
+$(NAME) : $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(RM) $(NAME).o
+
+bonus :
+	@ln -sf $(NAME) $(NAME_B)
+
+clean :
+	@$(RM) $(OBJS)
+
+fclean : clean
+	@$(RM) $(NAME) $(NAME_B)
+	@$(RM)
+
+re : fclean all
