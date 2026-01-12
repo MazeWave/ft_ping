@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/09 14:39:26 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/12 13:26:27 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ typedef struct s_ping
 	bool	is_bonus;
 	bool	is_root;
 	char	*hostname;
+	int		count;
+	int		interval;
 }	t_ping;
 
-int     parse_args(int argc, char **argv);
+int     parse_args(int argc, char **argv, t_ping *ping);
 void    help(char *elf_name);
 void    init_ping_struct(t_ping *ping, char **argv);
+void    print_ping_struct(t_ping *ping);
 
 #endif
