@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/13 11:48:28 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:54:26 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	print_addr_info(t_ping *ping)
 {
 	AUTO_LOG;
 
-	struct addrinfo *temp = ping->addr_info;
+	// return;
+	struct addrinfo	*temp = ping->addr_info;
 	while (temp)
 	{
 		LOG(BLUE);

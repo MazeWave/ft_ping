@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/13 10:56:42 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:54:18 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ int	main(int argc, char **argv unused)
 	// create the icmp socket
 	if (create_icmp_socket(ping) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	print_ping_struct(ping);
-
+	
 	// resolve the hostname
 	if (resolve_hostname(ping) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
+	
 	// create the ECHO_REQUEST header
 	// create_echo_request_header(ping);
 	
 	// calculate the checksum
 	// calculate_checksum(ping);
-
+	
 	// start pinging
 	// ping_loop(ping);
+	print_ping_struct(ping);
 	return (0);
 }
