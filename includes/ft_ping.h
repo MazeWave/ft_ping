@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/12 13:26:27 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/13 11:39:56 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,22 @@ typedef struct s_ping
 {
 	bool	is_bonus;
 	bool	is_root;
+	char	*program_name;
 	char	*hostname;
 	int		count;
 	int		interval;
+	int		sockfd;
+	struct	addrinfo *addr_info;
 }	t_ping;
 
-int     parse_args(int argc, char **argv, t_ping *ping);
-void    help(char *elf_name);
-void    init_ping_struct(t_ping *ping, char **argv);
-void    print_ping_struct(t_ping *ping);
+int		parse_args(int argc, char **argv, t_ping *ping);
+void	help(char *elf_name);
+void	init_ping_struct(t_ping *ping, char **argv);
+void	print_ping_struct(t_ping *ping);
+
+int		create_icmp_socket(t_ping *ping);
+int		resolve_hostname(t_ping *ping);
+void	print_addr_info(t_ping *ping);
+void	print_sockaddr(struct sockaddr *addr);
 
 #endif
