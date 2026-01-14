@@ -39,7 +39,7 @@ printf $MAGENTA"Parsing tests:"$RESET
 echo ""
 
 # Succeeding tests
-printf "Successing tests:"
+printf "Succeeding tests:"
 $command $website -c 1 > /dev/null 2>&1; result
 $command $localhost -c 1 > /dev/null 2>&1; result
 $command -c 1 $website > /dev/null 2>&1; result
@@ -57,7 +57,7 @@ echo ""
 printf $YELLOW"Bonus tests:"$RESET
 # Succeeding tests
 echo ""
-printf "Successing tests:"
+printf "Succeeding tests:"
 $command_bonus $website -c 1 > /dev/null 2>&1; result
 $command_bonus $localhost -c 1 > /dev/null 2>&1; result
 $command_bonus -c 1 $website > /dev/null 2>&1; result

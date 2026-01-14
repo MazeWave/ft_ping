@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/14 14:10:04 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:59:57 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	main(int argc, char **argv unused)
 	// start pinging
 	ping_loop(ping);
 	print_ping_struct(ping);
+	close(ping->sockfd);
 	return (0);
 }

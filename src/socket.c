@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:23 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 15:59:16 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:03:13 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 int	create_icmp_socket(t_ping *ping)
 {
 	AUTO_LOG;
-	
-	ping->sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if (ping->sockfd < 0 && !ping->is_root)
+
+	// Create the socket
+	if (ping->is_root) // If the user is root, create a raw socket
+		ping->sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
+	else // If the user is not root, create a DGRAM socket
 	{
 		printf(RED "%s: socket: Operation not permitted. Raw sockets require root privileges.\n" RESET, ping->program_name);
 		printf(RED "%s: socket: Creating a DGRAM socket instead.\n" RESET, ping->program_name);
-		close(ping->sockfd);
 		ping->sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP);
-		if (ping->sockfd < 0)
-			return (close(ping->sockfd), printf(RED "%s: socket: Failed to create socket.\n sockfd: %d" RESET, ping->program_name, ping->sockfd), EXIT_FAILURE);
 	}
+
+	// Check if the socket was created successfully
+	if (ping->sockfd < 0)
+		return (close(ping->sockfd), printf(RED "%s: socket: Failed to create socket.\n sockfd: %d" RESET, ping->program_name, ping->sockfd), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
