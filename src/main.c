@@ -6,11 +6,19 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/14 12:13:41 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:40:35 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ping.h"
+
+static	int	ping_loop(t_ping *ping)
+{
+	AUTO_LOG;
+
+	while (ping->count > 0 )
+	return (EXIT_SUCCESS);
+}
 
 int	main(int argc, char **argv unused)
 {

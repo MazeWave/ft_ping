@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 13:12:54 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:54:18 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ void    print_ping_struct(t_ping *ping)
 	LOG(RESET);
 }
 
-void	print_sockaddr(struct sockaddr_in *ai_addr)
+void	print_sockaddr(struct sockaddr_in *ai_addr, t_ping *ping)
 {
 	AUTO_LOG;
 	
 	char ip_str[INET_ADDRSTRLEN];
 	inet_ntop(AF_INET, &ai_addr->sin_addr, ip_str, INET_ADDRSTRLEN);
 	
-	LOG(GREEN "ip as int: %d" RESET, ai_addr->sin_addr);
+	// set the ip
+	ping->ip = ai_addr->sin_addr.s_addr;
+	ping->ip_str = ip_str;
+	LOG(GREEN "ip as int: %d" RESET, ping->ip);
 	LOG(GREEN "ip as string: %s" BLUE, ip_str);
 }
 
@@ -51,7 +54,7 @@ void	print_addr_info(t_ping *ping)
 		LOG("ai_protocol: %d", temp->ai_protocol);
 		LOG("ai_addrlen: %d", temp->ai_addrlen);
 		LOG("ai_addr: %p", temp->ai_addr);
-		print_sockaddr((struct sockaddr_in *)temp->ai_addr);
+		print_sockaddr((struct sockaddr_in *)temp->ai_addr, ping);
 		LOG("ai_canonname: %s", temp->ai_canonname);
 		LOG(RESET);
 		temp = temp->ai_next;
@@ -77,7 +80,8 @@ void	init_ping_struct(t_ping *ping, char **argv)
 	ping->is_root = (getuid() == 0);
 	ping->hostname = NULL;
 	ping->count = 0;
-	ping->interval = 0;
+	ping->interval = 1;
+	ping->ip = 0;
 }
 
 int parse_args(int argc, char **argv, t_ping *ping)
@@ -89,13 +93,21 @@ int parse_args(int argc, char **argv, t_ping *ping)
 	while (optind < argc)
 	{
 		// Checks for options
-		while ((opt = getopt(argc, argv, "?hvc:")) != -1)
+		while ((opt = getopt(argc, argv, "?hvc:i:")) != -1)
 		{
 			switch (opt)
 			{
 				case 'c':
 					ping->count = atoi(optarg);
 					LOG(GREEN "count: %d" RESET, ping->count);
+					if (ping->count <= 0)
+						return (LOG(RED "Error: Count must be greater than 0" RESET), help(argv[0]), EXIT_FAILURE);
+					break;
+				case 'i':
+					ping->interval = atof(optarg);
+					LOG(GREEN "interval: %f" RESET, ping->interval);
+					if (ping->interval < 0.2)
+						return (LOG(RED "Error: Interval must be greater than 0.2 seconds" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
 				case 'v':
 					return (version(), EXIT_SUCCESS);
@@ -109,7 +121,7 @@ int parse_args(int argc, char **argv, t_ping *ping)
 		else if (ping->hostname != NULL && argv[optind] != NULL)
 			return (LOG(RED "Error: Multiple hostnames provided" RESET), help(argv[0]), EXIT_FAILURE);
 	}
-	// If no hostname is provided, return an error
+	// Check if no hostname is provided 
 	if (ping->hostname == NULL)
 		return (LOG(RED "Error: No hostname provided" RESET), help(argv[0]), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
