@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 13:54:18 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:55:23 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int parse_args(int argc, char **argv, t_ping *ping)
 						return (LOG(RED "Error: Interval must be greater than 0.2 seconds" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
 				case 'v':
-					return (version(), EXIT_SUCCESS);
+					return (version(), EXIT_FAILURE);
 				case 'h':
-					return (help(argv[0]), EXIT_SUCCESS);
+					return (help(argv[0]), EXIT_FAILURE);
 			}
 		}
 		// Checks for standalone options
