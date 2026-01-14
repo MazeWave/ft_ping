@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 13:39:34 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:09:10 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,20 @@
 
 #define unused __attribute__((unused))
 
+typedef struct	s_icmp_header
+{
+	uint8_t		type;
+	uint8_t		code;
+	uint16_t	checksum;
+	uint16_t	id;
+	uint16_t	sequence;
+}	t_icmp_header;
+
 typedef struct s_ping
 {
-	struct		addrinfo *addr_info;
+	struct s_icmp_header	icmp_header;
+	struct addrinfo			*addr_info;
+
 	uint32_t	ip;
 	bool		is_bonus;
 	bool		is_root;

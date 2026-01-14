@@ -6,18 +6,28 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/14 13:40:35 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:10:04 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ping.h"
 
-static	int	ping_loop(t_ping *ping)
+static void	ping_loop(t_ping *ping)
 {
 	AUTO_LOG;
 
-	while (ping->count > 0 )
-	return (EXIT_SUCCESS);
+	return;
+	while (true)
+	{
+		// Send the ping
+		// send_ping(ping);
+		// Account for interval
+		usleep((size_t)(ping->interval * 1000000.0));
+		// Account for count
+		if (ping->count != -1)
+			(ping->count > 0) ? (ping->count--) : (ping->count--);
+	}
+	return;
 }
 
 int	main(int argc, char **argv unused)
@@ -49,7 +59,7 @@ int	main(int argc, char **argv unused)
 	// calculate_checksum(ping);
 	
 	// start pinging
-	// ping_loop(ping);
+	ping_loop(ping);
 	print_ping_struct(ping);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 13:55:23 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 14:01:43 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	init_ping_struct(t_ping *ping, char **argv)
 	ping->is_bonus = (strstr(argv[0], "ft_ping_bonus") == NULL) ? false : true;
 	ping->is_root = (getuid() == 0);
 	ping->hostname = NULL;
-	ping->count = 0;
+	ping->count = -1;
 	ping->interval = 1;
 	ping->ip = 0;
 }
@@ -99,13 +99,13 @@ int parse_args(int argc, char **argv, t_ping *ping)
 			{
 				case 'c':
 					ping->count = atoi(optarg);
-					LOG(GREEN "count: %d" RESET, ping->count);
+					LOG(BLUE "count: %d" RESET, ping->count);
 					if (ping->count <= 0)
 						return (LOG(RED "Error: Count must be greater than 0" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
 				case 'i':
 					ping->interval = atof(optarg);
-					LOG(GREEN "interval: %f" RESET, ping->interval);
+					LOG(BLUE "interval: %f" RESET, ping->interval);
 					if (ping->interval < 0.2)
 						return (LOG(RED "Error: Interval must be greater than 0.2 seconds" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
