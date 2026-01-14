@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/13 16:54:18 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:13:41 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int argc, char **argv unused)
 	t_ping	*ping = &pingu;
 
 	init_ping_struct(ping, argv);
-	parse_args(argc, argv, ping);
+	if (parse_args(argc, argv, ping) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	
 	// create the icmp socket
 	if (create_icmp_socket(ping) == EXIT_FAILURE)

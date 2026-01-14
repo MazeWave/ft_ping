@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/13 16:54:26 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:30:35 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ void    print_ping_struct(t_ping *ping)
 	LOG(RESET);
 }
 
-void	print_sockaddr(struct sockaddr *addr)
+void	print_sockaddr(struct sockaddr_in *ai_addr)
 {
 	AUTO_LOG;
 	
-	LOG(GREEN "ip as int: %d", addr->sa_data);
-	LOG("ip as string: %s" BLUE, inet_ntoa(*(struct in_addr *)addr->sa_data));
+	char ip_str[INET_ADDRSTRLEN];
+	inet_ntop(AF_INET, &ai_addr->sin_addr, ip_str, INET_ADDRSTRLEN);
+	
+	LOG(GREEN "ip as int: %d" RESET, ai_addr->sin_addr);
+	LOG(GREEN "ip as string: %s" BLUE, ip_str);
 }
 
 void	print_addr_info(t_ping *ping)
@@ -48,7 +51,7 @@ void	print_addr_info(t_ping *ping)
 		LOG("ai_protocol: %d", temp->ai_protocol);
 		LOG("ai_addrlen: %d", temp->ai_addrlen);
 		LOG("ai_addr: %p", temp->ai_addr);
-		print_sockaddr(temp->ai_addr);
+		print_sockaddr((struct sockaddr_in *)temp->ai_addr);
 		LOG("ai_canonname: %s", temp->ai_canonname);
 		LOG(RESET);
 		temp = temp->ai_next;
@@ -80,25 +83,36 @@ void	init_ping_struct(t_ping *ping, char **argv)
 int parse_args(int argc, char **argv, t_ping *ping)
 {
 	AUTO_LOG;
-	// get the options
+
 	int opt = 0;
-	while ((opt = getopt(argc, argv, "hvc:")) != -1)
+	while (optind < argc)
 	{
-		switch (opt)
+		// Checks for options
+		while ((opt = getopt(argc, argv, "hvc:")) != -1)
 		{
-			case 'c':
+			switch (opt)
+			{
+				case 'c':
 				ping->count = atoi(optarg);
+				LOG(GREEN "count: %d" RESET, ping->count);
 				break;
-			case 'v':
+				case 'v':
 				return (version(), EXIT_SUCCESS);
-			case 'h':
+				case 'h':
 				return (help(argv[0]), EXIT_SUCCESS);
+			}
+		}
+		// Checks for standalone options
+		if (ping->hostname == NULL)
+		{
+			ping->hostname = argv[optind];
+			optind++;
+		}
+		else if (ping->hostname != NULL && optind == argc - 1)
+		{
+			LOG(RED "Error: No hostname provided" RESET);
+			return (help(argv[0]), EXIT_FAILURE);
 		}
 	}
-	// check if a hostname is provided
-	if (optind != argc - 1)
-		return (help(argv[0]), EXIT_FAILURE);
-	// set the hostname
-	ping->hostname = argv[optind];
 	return (EXIT_SUCCESS);
 }
