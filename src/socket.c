@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:22:23 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/13 16:56:30 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:58:17 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ int	create_icmp_socket(t_ping *ping)
 	AUTO_LOG;
 	
 	ping->sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if (ping->sockfd < 0)
+	if (ping->sockfd < 0 && !ping->is_root)
 	{
-		if (!ping->is_root)
-		{
-			printf(RED "%s: socket: Operation not permitted. Raw sockets require root privileges.\n" RESET, ping->program_name);
-			return (EXIT_FAILURE);
-		}
-		else
-		{
-			printf(RED "%s: socket: Failed to create socket.\n sockfd: %d" RESET, ping->program_name, ping->sockfd);
-			return (EXIT_FAILURE);
-		}
+		printf(RED "%s: socket: Operation not permitted. Raw sockets require root privileges.\n" RESET, ping->program_name);
+		printf(RED "%s: socket: Creating a DGRAM socket instead.\n" RESET, ping->program_name);
+		close(ping->sockfd);
+		ping->sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_ICMP);
+		if (ping->sockfd < 0)
+			return (printf(RED "%s: socket: Failed to create socket.\n sockfd: %d" RESET, ping->program_name, ping->sockfd), EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
