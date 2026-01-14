@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 12:30:35 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:12:54 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,34 +85,32 @@ int parse_args(int argc, char **argv, t_ping *ping)
 	AUTO_LOG;
 
 	int opt = 0;
+	// Parse all the arguments
 	while (optind < argc)
 	{
 		// Checks for options
-		while ((opt = getopt(argc, argv, "hvc:")) != -1)
+		while ((opt = getopt(argc, argv, "?hvc:")) != -1)
 		{
 			switch (opt)
 			{
 				case 'c':
-				ping->count = atoi(optarg);
-				LOG(GREEN "count: %d" RESET, ping->count);
-				break;
+					ping->count = atoi(optarg);
+					LOG(GREEN "count: %d" RESET, ping->count);
+					break;
 				case 'v':
-				return (version(), EXIT_SUCCESS);
+					return (version(), EXIT_SUCCESS);
 				case 'h':
-				return (help(argv[0]), EXIT_SUCCESS);
+					return (help(argv[0]), EXIT_SUCCESS);
 			}
 		}
 		// Checks for standalone options
 		if (ping->hostname == NULL)
-		{
-			ping->hostname = argv[optind];
-			optind++;
-		}
-		else if (ping->hostname != NULL && optind == argc - 1)
-		{
-			LOG(RED "Error: No hostname provided" RESET);
-			return (help(argv[0]), EXIT_FAILURE);
-		}
+			ping->hostname = argv[optind++];
+		else if (ping->hostname != NULL && argv[optind] != NULL)
+			return (LOG(RED "Error: Multiple hostnames provided" RESET), help(argv[0]), EXIT_FAILURE);
 	}
+	// If no hostname is provided, return an error
+	if (ping->hostname == NULL)
+		return (LOG(RED "Error: No hostname provided" RESET), help(argv[0]), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
