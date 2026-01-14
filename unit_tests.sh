@@ -69,3 +69,12 @@ printf "Failing tests:"
 $command_bonus $website -c 1 $website > /dev/null 2>&1; result
 $command_bonus $localhost -c 1 $website > /dev/null 2>&1; result
 $command_bonus $website -c 1 $localhost > /dev/null 2>&1; result
+
+
+
+
+
+
+
+
+echo ""
