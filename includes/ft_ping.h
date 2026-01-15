@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 14:09:10 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 12:59:51 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@
 
 typedef struct	s_icmp_header
 {
+	// First 32 bits
 	uint8_t		type;
 	uint8_t		code;
 	uint16_t	checksum;
-	uint16_t	id;
-	uint16_t	sequence;
+	
+	// Second 32 bits
+	uint16_t	identifier;
+	uint16_t	sequence_number;
+
+	// Payload (32 bits * x times needed)
+	uint32_t	*payload;
 }	t_icmp_header;
 
 typedef struct s_ping

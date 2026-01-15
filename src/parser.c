@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/14 17:47:22 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:56:15 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_sockaddr(struct sockaddr_in *ai_addr, t_ping *ping)
 	// set the ip
 	ping->ip = ai_addr->sin_addr.s_addr;
 	ping->ip_str = ip_str;
-	LOG(GREEN "ip as int: %d" RESET, ping->ip);
+	LOG(GREEN "ip as int: %d" BLUE, ping->ip);
 	LOG(GREEN "ip as string: %s" BLUE, ip_str);
 }
 
