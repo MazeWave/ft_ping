@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 16:38:26 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:40:15 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_ping
 	char		*program_name;
 	char		*hostname;
 	char		*ip_str;
-	uint16_t	*payload;
+	uint8_t	*payload;
 	size_t		payload_length;
 	int			count;
 	int			sockfd;
@@ -90,6 +90,6 @@ void	print_sockaddr(struct sockaddr_in *ai_addr, t_ping *ping);
 // echo_request.c
 t_echo_header	init_echo_header(size_t type);
 uint16_t		calculate_checksum(t_echo_header echo_header);
-void			populate_echo_request(t_ping *ping, uint32_t *payload);
+void			populate_echo_request(t_ping *ping, uint8_t *payload);
 
 #endif

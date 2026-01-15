@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 15:09:13 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 16:39:21 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:40:03 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ uint16_t	calculate_checksum(t_echo_header echo_request unused)
 	return (checksum);
 }
 
-void	populate_echo_request(t_ping *ping, uint32_t *payload unused)
+void	populate_echo_request(t_ping *ping, uint8_t *payload unused)
 {
 	// TODO : Put the payload in the echo request
 	

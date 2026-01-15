@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 16:36:24 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:41:27 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ void	init_ping_struct(t_ping *ping, char **argv)
 	ping->ip_str = NULL;
 	ping->addr_info = NULL;
 	ping->echo_request = init_echo_header(ICMP_ECHO);
-	ping->count = -1;
 	ping->interval = 1;
+	ping->payload_length = 0;
 	ping->ip = 0;
+	ping->count = -1;
 }
 
 int parse_args(int argc, char **argv, t_ping *ping)
