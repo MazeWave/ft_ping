@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 14:56:15 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:36:24 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ void	init_ping_struct(t_ping *ping, char **argv)
 	ping->is_bonus = (strstr(argv[0], "ft_ping_bonus") == NULL) ? false : true;
 	ping->is_root = (getuid() == 0);
 	ping->hostname = NULL;
+	ping->payload = NULL;
+	ping->ip_str = NULL;
+	ping->addr_info = NULL;
+	ping->echo_request = init_echo_header(ICMP_ECHO);
 	ping->count = -1;
 	ping->interval = 1;
 	ping->ip = 0;
@@ -109,6 +113,9 @@ int parse_args(int argc, char **argv, t_ping *ping)
 					if (ping->interval < 0.2)
 						return (LOG(RED "Error: Interval must be greater than 0.2 seconds" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
+				case 'p':
+					ping->payload_length = strlen(optarg);
+					ping->payload = optarg;
 				case 'v':
 					return (version(), EXIT_FAILURE);
 				case 'h':

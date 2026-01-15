@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 12:59:51 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:38:26 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 
 #define unused __attribute__((unused))
 
-typedef struct	s_icmp_header
+typedef struct	s_echo_header
 {
 	// First 32 bits
 	uint8_t		type;
@@ -55,11 +55,11 @@ typedef struct	s_icmp_header
 
 	// Payload (32 bits * x times needed)
 	uint32_t	*payload;
-}	t_icmp_header;
+}	t_echo_header;
 
 typedef struct s_ping
 {
-	struct s_icmp_header	icmp_header;
+	struct s_echo_header	echo_request;
 	struct addrinfo			*addr_info;
 
 	uint32_t	ip;
@@ -68,19 +68,28 @@ typedef struct s_ping
 	char		*program_name;
 	char		*hostname;
 	char		*ip_str;
+	uint16_t	*payload;
+	size_t		payload_length;
 	int			count;
 	int			sockfd;
 	float		interval;
 }	t_ping;
 
+// parser.c
 int		parse_args(int argc, char **argv, t_ping *ping);
 void	help(char *elf_name);
 void	init_ping_struct(t_ping *ping, char **argv);
 void	print_ping_struct(t_ping *ping);
 
+// socket.c
 int		create_icmp_socket(t_ping *ping);
 int		resolve_hostname(t_ping *ping);
 void	print_addr_info(t_ping *ping);
 void	print_sockaddr(struct sockaddr_in *ai_addr, t_ping *ping);
+
+// echo_request.c
+t_echo_header	init_echo_header(size_t type);
+uint16_t		calculate_checksum(t_echo_header echo_header);
+void			populate_echo_request(t_ping *ping, uint32_t *payload);
 
 #endif

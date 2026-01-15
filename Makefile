@@ -6,7 +6,7 @@
 #    By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/09 11:23:20 by maze              #+#    #+#              #
-#    Updated: 2026/01/12 15:28:15 by ldalmass         ###   ########.fr        #
+#    Updated: 2026/01/15 15:51:34 by ldalmass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC		=	src/main.c \
 			src/log.c \
 			src/parser.c \
 			src/socket.c \
+			src/echo_header.c \
 
 OBJS	=	$(SRC:.c=.o)
 
