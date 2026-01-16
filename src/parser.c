@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/16 16:10:26 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:18:51 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,15 @@ void	print_addr_info(t_ping *ping)
 void	help(char *elf_name)
 {
 	AUTO_LOG;
-	printf("Usage: %s <hostname>\n", elf_name);
+	printf(GREEN "Usage: %s <hostname> [options]\n" RESET, elf_name);
+	
+	printf("Options:\n");
+	printf("  -c <count>    : Set the number of pings to send\n");
+	printf("  -i <interval> : Set the interval between pings\n");
+	printf("  -p <pattern>  : Set the pattern to send in the payload\n");
+	printf("  -t <interval> : Set the interval between pings\n");
+	printf("  -v            : Print the version\n");
+	printf("  -h -?         : Print the help\n");
 }
 
 void	version(void)
@@ -122,6 +130,7 @@ int parse_args(int argc, char **argv, t_ping *ping)
 					break;
 				case 't':
 					ping->interval = atof(optarg);
+					break;
 				case 'v':
 					return (version(), EXIT_FAILURE);
 				case 'h':
