@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:27:26 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 16:40:15 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/16 15:01:43 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 
 #define unused __attribute__((unused))
 
+// TO REMOVE LATER
+#define true 1
+#define false 0
+#define bool int
+// END TO REMOVE LATER
+
 typedef struct	s_echo_header
 {
 	// First 32 bits
@@ -60,16 +66,18 @@ typedef struct	s_echo_header
 typedef struct s_ping
 {
 	struct s_echo_header	echo_request;
+	struct s_echo_header	*echo_replies;
 	struct addrinfo			*addr_info;
 
-	uint32_t	ip;
 	bool		is_bonus;
 	bool		is_root;
 	char		*program_name;
 	char		*hostname;
 	char		*ip_str;
-	uint8_t	*payload;
-	size_t		payload_length;
+	char		*payload_raw_string;
+	uint32_t	payload_length;
+	uint32_t	*payload;
+	uint32_t	ip;
 	int			count;
 	int			sockfd;
 	float		interval;
@@ -90,6 +98,6 @@ void	print_sockaddr(struct sockaddr_in *ai_addr, t_ping *ping);
 // echo_request.c
 t_echo_header	init_echo_header(size_t type);
 uint16_t		calculate_checksum(t_echo_header echo_header);
-void			populate_echo_request(t_ping *ping, uint8_t *payload);
+void			populate_echo_request(t_ping *ping);
 
 #endif

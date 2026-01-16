@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 14:35:54 by ldalmass          #+#    #+#             */
-/*   Updated: 2026/01/15 16:41:27 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:10:26 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int parse_args(int argc, char **argv, t_ping *ping)
 	while (optind < argc)
 	{
 		// Checks for options
-		while ((opt = getopt(argc, argv, "?hvc:i:")) != -1)
+		while ((opt = getopt(argc, argv, "?hvc:i:p:t:")) != -1)
 		{
 			switch (opt)
 			{
@@ -115,11 +115,20 @@ int parse_args(int argc, char **argv, t_ping *ping)
 						return (LOG(RED "Error: Interval must be greater than 0.2 seconds" RESET), help(argv[0]), EXIT_FAILURE);
 					break;
 				case 'p':
+					// if (optarg[0] == '-')
+					// 	return (LOG(RED "Error: Pattern cannot be empty" RESET), help(argv[0]), EXIT_FAILURE);
 					ping->payload_length = strlen(optarg);
-					ping->payload = optarg;
+					ping->payload_raw_string = optarg;
+					break;
+				case 't':
+					ping->interval = atof(optarg);
 				case 'v':
 					return (version(), EXIT_FAILURE);
 				case 'h':
+					return (help(argv[0]), EXIT_FAILURE);
+				case '?':
+					return (help(argv[0]), EXIT_FAILURE);
+				default:
 					return (help(argv[0]), EXIT_FAILURE);
 			}
 		}

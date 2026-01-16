@@ -6,7 +6,7 @@
 /*   By: ldalmass <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:26:14 by maze              #+#    #+#             */
-/*   Updated: 2026/01/15 15:50:33 by ldalmass         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:06:42 by ldalmass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv unused)
 		return (EXIT_FAILURE);
 	
 	// create the ECHO_REQUEST header
-	populate_echo_request(ping, ping->payload);
+	populate_echo_request(ping);
 	
 	// calculate the checksum
 	// calculate_checksum(ping);
